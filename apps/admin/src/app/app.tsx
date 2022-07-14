@@ -1,13 +1,27 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.scss';
-import NxWelcome from './nx-welcome';
+import Dashboard from './pages/dashboard/Dashboard';
+import { ThemeProvider, Header, NavItem } from '@roamlerorg/ui-components';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ReactComponent as Logo } from '../assets/logo.svg';
+import userAvatar from '../assets/user.jpg';
+
+const navigation: NavItem[] = [
+  {
+    title: 'Dashboard',
+    path: '/dashboard',
+  },
+  {
+    title: 'Settings',
+    path: '/settings',
+  },
+];
 
 export function App() {
   return (
-    <>
-      <NxWelcome title="admin" />
-      <div />
-    </>
+    <ThemeProvider>
+      <CssBaseline />
+      <Header logo={Logo} navigation={navigation} avatar={userAvatar} />
+      <Dashboard />
+    </ThemeProvider>
   );
 }
 
