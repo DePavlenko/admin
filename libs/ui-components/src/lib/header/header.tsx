@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
@@ -23,16 +24,11 @@ interface HeaderProps {
 }
 
 export const Header = ({ logo: Logo, navigation, avatar }: HeaderProps) => {
+  const { pathname } = useLocation();
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
   });
-
-  const [value, setValue] = React.useState('Dashboard');
-
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
-  };
 
   return (
     <AppBar
@@ -45,9 +41,8 @@ export const Header = ({ logo: Logo, navigation, avatar }: HeaderProps) => {
           <Logo />
         </Box>
         <Tabs
-          value={value}
+          value={pathname}
           sx={{ mr: 2, display: { xs: 'none', sm: 'flex' } }}
-          onChange={handleChange}
           aria-label="navigation"
         >
           {navigation.map((item) => (
@@ -58,8 +53,10 @@ export const Header = ({ logo: Logo, navigation, avatar }: HeaderProps) => {
                 '&.Mui-selected': { color: 'red' },
               }}
               key={item.title}
-              value={item.title}
+              value={item.path}
               label={item.title}
+              component={Link}
+              to={item.path}
             />
           ))}
         </Tabs>
