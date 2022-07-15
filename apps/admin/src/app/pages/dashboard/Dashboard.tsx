@@ -8,6 +8,11 @@ import {
   Link,
 } from '@mui/material';
 import { Table, TableContent } from '@roamlerorg/ui-components';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import {
+  fetchUniversities,
+  selectUniversities,
+} from '../../store/universities/universities.slice';
 
 const countries = ['Netherlands', 'France', 'Ukraine', 'Brazil'];
 
@@ -49,37 +54,19 @@ const tableContent: TableContent<University>[] = [
 ];
 
 const Dashboard = () => {
+  const dispatch = useAppDispatch();
+  const { data, status } = useAppSelector(selectUniversities);
   const [country, setCountry] = useState(countries[0]);
-  const [loading, setLoading] = useState(false);
-  const [universities, setUniversities] = useState<University[]>([]);
-  const [error, setError] = useState<null | string>(null);
 
   useEffect(() => {
-    (async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const response = await fetch(
-          `http://universities.hipolabs.com/search?country=${country}`
-        );
-        if (!response.ok) {
-          throw new Error(`Error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        setUniversities(data.slice(0, 10));
-      } catch (error) {
-        const typedError = error as Error;
-        setError(typedError.message);
-      }
-      setLoading(false);
-    })();
-  }, [country]);
+    dispatch(fetchUniversities(country));
+  }, [dispatch, country]);
 
   const handleCountryChange = (
     event: React.MouseEvent<HTMLElement>,
-    country: string
+    country: string | null
   ) => {
-    setCountry(country);
+    country && setCountry(country);
   };
 
   return (
@@ -111,12 +98,7 @@ const Dashboard = () => {
           ))}
         </ToggleButtonGroup>
       </Box>
-      <Table
-        loading={loading}
-        data={universities}
-        error={error}
-        content={tableContent}
-      />
+      <Table status={status} data={data} content={tableContent} />
     </Container>
   );
 };

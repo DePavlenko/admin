@@ -4,6 +4,8 @@
   "projects": {
     "admin": "apps/admin",
     "admin-e2e": "apps/admin-e2e",
+    "services": "libs/services",
+    "types": "libs/types",
     "ui-components": "libs/ui-components"
   }
 }

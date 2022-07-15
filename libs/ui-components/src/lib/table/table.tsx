@@ -12,6 +12,7 @@ import {
   Box,
   Alert,
 } from '@mui/material';
+import { Status } from '@roamlerorg/types';
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(even)': {
@@ -43,11 +44,11 @@ export type TableContent<T> = {
 export interface TableProps<T> {
   data: T[];
   content: TableContent<T>[];
-  loading: boolean;
+  status: Status;
   error?: null | string;
 }
 
-export const Table = <T,>({ loading, data, error, content }: TableProps<T>) => {
+export const Table = <T,>({ status, data, error, content }: TableProps<T>) => {
   const renderLoading = () => {
     return (
       <StyledTableRow>
@@ -99,9 +100,9 @@ export const Table = <T,>({ loading, data, error, content }: TableProps<T>) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {error && renderError()}
-          {loading && !error && renderLoading()}
-          {!loading && !error && renderContent()}
+          {status === 'loading' && renderLoading()}
+          {status === 'idle' && renderContent()}
+          {status === 'failed' && renderError()}
         </TableBody>
       </MUITable>
     </TableContainer>
