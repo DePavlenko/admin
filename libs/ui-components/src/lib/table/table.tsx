@@ -11,6 +11,8 @@ import {
   CircularProgress,
   Box,
   Alert,
+  TableRowProps,
+  TableCellProps,
 } from '@mui/material';
 import { Status } from '@roamlerorg/types';
 
@@ -37,8 +39,8 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 export type TableContent<T> = {
   title: string;
   render: (data: T) => string | JSX.Element;
-  trProps?: object;
-  tdProps?: object;
+  trProps?: TableRowProps;
+  tdProps?: TableCellProps;
 };
 
 export interface TableProps<T> {
@@ -54,7 +56,7 @@ export const Table = <T,>({ status, data, error, content }: TableProps<T>) => {
       <StyledTableRow>
         <StyledTableCell colSpan={content.length}>
           <Box sx={{ display: 'flex', justifyContent: 'center', my: 5 }}>
-            <CircularProgress />
+            <CircularProgress data-testid="progress" />
           </Box>
         </StyledTableCell>
       </StyledTableRow>
@@ -78,7 +80,7 @@ export const Table = <T,>({ status, data, error, content }: TableProps<T>) => {
       <StyledTableRow>
         <StyledTableCell colSpan={content.length}>
           <Box sx={{ display: 'flex', justifyContent: 'center', my: 5 }}>
-            <Alert variant="filled" severity="error">
+            <Alert variant="filled" severity="error" data-testid="error">
               {error}
             </Alert>
           </Box>
