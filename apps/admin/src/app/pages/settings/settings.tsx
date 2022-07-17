@@ -2,7 +2,7 @@ import { Container, Typography } from '@mui/material';
 
 const Settings = () => {
   return (
-    <Container sx={{ my: 2.5 }}>
+    <Container sx={{ my: 4 }}>
       {[...new Array(12)].map((_, idx) => (
         <Typography key={idx}>
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus nemo

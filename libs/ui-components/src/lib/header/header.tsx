@@ -21,9 +21,15 @@ interface HeaderProps {
   logo: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
   navigation: NavItem[];
   avatar: string;
+  isLogged: boolean;
 }
 
-export const Header = ({ logo: Logo, navigation, avatar }: HeaderProps) => {
+export const Header = ({
+  logo: Logo,
+  navigation,
+  avatar,
+  isLogged,
+}: HeaderProps) => {
   const { pathname } = useLocation();
   const trigger = useScrollTrigger({
     disableHysteresis: true,
@@ -40,30 +46,38 @@ export const Header = ({ logo: Logo, navigation, avatar }: HeaderProps) => {
         <Box sx={{ flexGrow: 1, display: 'flex' }}>
           <Logo />
         </Box>
-        <Tabs
-          value={pathname}
-          sx={{ mr: 2, display: { xs: 'none', sm: 'flex' } }}
-          aria-label="navigation"
-        >
-          {navigation.map((item) => (
-            <Tab
-              sx={{
-                height: 64,
-                color: 'gray',
-                '&.Mui-selected': { color: 'red' },
-              }}
-              key={item.title}
-              value={item.path}
-              label={item.title}
-              component={Link}
-              to={item.path}
+        {isLogged && (
+          <>
+            <Tabs
+              value={pathname}
+              sx={{ mr: 2, display: { xs: 'none', sm: 'flex' } }}
+              aria-label="navigation"
+            >
+              {navigation.map((item) => (
+                <Tab
+                  sx={{
+                    height: 64,
+                    color: 'gray',
+                    '&.Mui-selected': { color: 'red' },
+                  }}
+                  key={item.title}
+                  value={item.path}
+                  label={item.title}
+                  component={Link}
+                  to={item.path}
+                />
+              ))}
+            </Tabs>
+            <Avatar
+              alt="user"
+              src={avatar}
+              sx={{ width: 32, height: 32, mr: 2 }}
             />
-          ))}
-        </Tabs>
-        <Avatar alt="user" src={avatar} sx={{ width: 32, height: 32, mr: 2 }} />
-        <IconButton edge="start" color="inherit" aria-label="menu">
-          <MenuIcon />
-        </IconButton>
+            <IconButton edge="start" color="inherit" aria-label="menu">
+              <MenuIcon />
+            </IconButton>
+          </>
+        )}
       </Toolbar>
     </AppBar>
   );

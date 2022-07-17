@@ -32,7 +32,7 @@ export const universitiesSlice = createSlice({
       })
       .addCase(fetchUniversities.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.data = action.payload;
+        state.data = action.payload.slice(0, 10);
       })
       .addCase(fetchUniversities.rejected, (state) => {
         state.status = 'failed';

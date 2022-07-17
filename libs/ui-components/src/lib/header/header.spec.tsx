@@ -11,6 +11,7 @@ describe('Header', () => {
     render(
       <BrowserRouter>
         <Header
+          isLogged={true}
           logo={MockLogo}
           navigation={mockNavigation}
           avatar={mockAvatar}

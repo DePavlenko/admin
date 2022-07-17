@@ -67,7 +67,7 @@ const Dashboard = () => {
   };
 
   return (
-    <Container sx={{ my: 2.5 }}>
+    <Container sx={{ my: 4 }}>
       <Box
         sx={{
           display: 'flex',

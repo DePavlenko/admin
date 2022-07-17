@@ -17,4 +17,5 @@ Primary.args = {
   logo: Logo,
   navigation: mockNavigation,
   avatar: user,
+  isLogged: true,
 };
