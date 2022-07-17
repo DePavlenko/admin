@@ -11,7 +11,6 @@ import {
   CircularProgress,
   Box,
   Alert,
-  TableRowProps,
   TableCellProps,
 } from '@mui/material';
 import { Status } from '@roamlerorg/types';
@@ -39,7 +38,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 export type TableContent<T> = {
   title: string;
   render: (data: T) => string | JSX.Element;
-  trProps?: TableRowProps;
   tdProps?: TableCellProps;
 };
 
@@ -94,8 +92,8 @@ export const Table = <T,>({ status, data, error, content }: TableProps<T>) => {
       <MUITable sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            {content.map(({ title, trProps }, idx) => (
-              <StyledTableCell key={idx} {...trProps}>
+            {content.map(({ title, tdProps }, idx) => (
+              <StyledTableCell key={idx} {...tdProps}>
                 {title}
               </StyledTableCell>
             ))}
