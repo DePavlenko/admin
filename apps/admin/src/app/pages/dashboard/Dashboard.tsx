@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import {
   Box,
   ToggleButtonGroup,
@@ -10,6 +10,7 @@ import {
 import { Table, TableContent } from '@roamlerorg/ui-components';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import {
+  setCountry,
   fetchUniversities,
   selectUniversities,
 } from '../../store/universities/universities.slice';
@@ -26,7 +27,7 @@ const tableContent: TableContent<University>[] = [
   {
     title: 'Display name and domain',
     render: (data: University) => data.domains[0],
-    trProps: {
+    tdProps: {
       sx: {
         width: 400,
       },
@@ -35,7 +36,7 @@ const tableContent: TableContent<University>[] = [
   {
     title: 'Country',
     render: (data: University) => data.country,
-    trProps: {
+    tdProps: {
       sx: {
         width: 350,
       },
@@ -44,9 +45,6 @@ const tableContent: TableContent<University>[] = [
   {
     title: 'Website',
     render: (data: University) => <Link href={data.web_pages[0]}>Website</Link>,
-    trProps: {
-      align: 'right',
-    },
     tdProps: {
       align: 'right',
     },
@@ -55,8 +53,7 @@ const tableContent: TableContent<University>[] = [
 
 const Dashboard = () => {
   const dispatch = useAppDispatch();
-  const { data, status } = useAppSelector(selectUniversities);
-  const [country, setCountry] = useState(countries[0]);
+  const { data, status, country } = useAppSelector(selectUniversities);
 
   useEffect(() => {
     dispatch(fetchUniversities(country));
@@ -66,7 +63,7 @@ const Dashboard = () => {
     event: React.MouseEvent<HTMLElement>,
     country: string | null
   ) => {
-    country && setCountry(country);
+    country && dispatch(setCountry(country));
   };
 
   return (

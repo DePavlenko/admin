@@ -6,11 +6,13 @@ import { UniversitiesService } from '@roamlerorg/services';
 const universitiesService = new UniversitiesService();
 
 export interface UniversityState {
+  country: string;
   data: University[];
   status: Status;
 }
 
 const initialState: UniversityState = {
+  country: 'Netherlands',
   status: 'idle',
   data: [],
 };
@@ -18,7 +20,11 @@ const initialState: UniversityState = {
 export const universitiesSlice = createSlice({
   name: 'universities',
   initialState,
-  reducers: {},
+  reducers: {
+    setCountry: (state, action) => {
+      state.country = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchUniversities.pending, (state) => {
@@ -33,6 +39,8 @@ export const universitiesSlice = createSlice({
       });
   },
 });
+
+export const { setCountry } = universitiesSlice.actions;
 
 export const fetchUniversities = createAsyncThunk(
   'universities/fetchUniversities',
