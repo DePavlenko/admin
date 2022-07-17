@@ -47,7 +47,7 @@ export interface TableProps<T> {
   data: T[];
   content: TableContent<T>[];
   status: Status;
-  error?: null | string;
+  error?: string;
 }
 
 export const Table = <T,>({ status, data, error, content }: TableProps<T>) => {
@@ -81,7 +81,7 @@ export const Table = <T,>({ status, data, error, content }: TableProps<T>) => {
         <StyledTableCell colSpan={content.length}>
           <Box sx={{ display: 'flex', justifyContent: 'center', my: 5 }}>
             <Alert variant="filled" severity="error" data-testid="error">
-              {error}
+              {error || 'Something went wrong'}
             </Alert>
           </Box>
         </StyledTableCell>
