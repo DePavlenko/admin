@@ -2,7 +2,11 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { University } from '@roamlerorg/types';
 import { store } from '../store';
-import { UniversityState, fetchUniversities } from './universities.slice';
+import {
+  UniversityState,
+  setCountry,
+  fetchUniversities,
+} from './universities.slice';
 
 const universities: University[] = [
   {
@@ -38,6 +42,15 @@ describe('universities reducer', () => {
   it('should handle initial state', () => {
     const state = store.getState().universities;
     expect(state).toEqual(initialState);
+  });
+
+  it('should handle country change', () => {
+    store.dispatch(setCountry('France'));
+    const state = store.getState().universities;
+    expect(state).toEqual({
+      ...initialState,
+      country: 'France',
+    });
   });
 
   it('Should be able to fetch the universities list for a specific country', async () => {
