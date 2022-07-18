@@ -57,8 +57,8 @@ export const Header = ({
                 <Tab
                   sx={{
                     height: 64,
-                    color: 'gray',
-                    '&.Mui-selected': { color: 'red' },
+                    color: '#666',
+                    '&.Mui-selected': { color: '#666', fontWeight: 700 },
                   }}
                   key={item.title}
                   value={item.path}
