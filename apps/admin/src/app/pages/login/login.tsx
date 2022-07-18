@@ -37,17 +37,18 @@ const Login = () => {
       >
         <Typography variant="h3">Log in</Typography>
         <TextField
-          label="Name"
-          id="outlined-required"
+          label="Email"
           value={name}
+          name="email"
+          type="email"
           onChange={(e) => setName(e.target.value)}
         />
         <TextField
           label="Password"
+          value={password}
+          name="password"
           type="password"
           autoComplete="current-password"
-          id="outlined-password-input"
-          value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <Button

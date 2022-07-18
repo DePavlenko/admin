@@ -1,0 +1,37 @@
+[
+  {
+    "country": "France",
+    "domains": ["test domain", "test domain 2"],
+    "web_pages": ["http://test1.com", "http://test2.com"]
+  },
+  {
+    "country": "France",
+    "domains": ["test domain", "test domain 2"],
+    "web_pages": ["http://test1.com", "http://test2.com"]
+  },
+  {
+    "country": "France",
+    "domains": ["test domain", "test domain 2"],
+    "web_pages": ["http://test1.com", "http://test2.com"]
+  },
+  {
+    "country": "France",
+    "domains": ["test domain", "test domain 2"],
+    "web_pages": ["http://test1.com", "http://test2.com"]
+  },
+  {
+    "country": "France",
+    "domains": ["test domain", "test domain 2"],
+    "web_pages": ["http://test1.com", "http://test2.com"]
+  },
+  {
+    "country": "France",
+    "domains": ["test domain", "test domain 2"],
+    "web_pages": ["http://test1.com", "http://test2.com"]
+  },
+  {
+    "country": "France",
+    "domains": ["test domain", "test domain 2"],
+    "web_pages": ["http://test1.com", "http://test2.com"]
+  }
+]
