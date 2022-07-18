@@ -7,6 +7,7 @@ import {
   Typography,
   Link,
 } from '@mui/material';
+import { University } from '@roamlerorg/types';
 import { Table, TableContent } from '@roamlerorg/ui-components';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import {
@@ -17,17 +18,23 @@ import {
 
 const countries = ['Netherlands', 'France', 'Ukraine', 'Brazil'];
 
-type University = {
-  domains: string[];
-  country: string;
-  web_pages: string[];
-};
-
 const tableContent: TableContent<University>[] = [
   {
     title: 'Display name and domain',
-    render: (data: University) => data.domains[0],
+    render: (data) => (
+      <Box>
+        <Typography sx={{ fontWeight: 700 }}>{data.name}</Typography>
+        <Typography component="span" sx={{ color: '#666' }}>
+          {data.domains[0]}
+        </Typography>
+      </Box>
+    ),
     tdProps: {
+      sx: {
+        width: 400,
+      },
+    },
+    thProps: {
       sx: {
         width: 400,
       },
@@ -35,17 +42,15 @@ const tableContent: TableContent<University>[] = [
   },
   {
     title: 'Country',
-    render: (data: University) => data.country,
-    tdProps: {
-      sx: {
-        width: 350,
-      },
-    },
+    render: (data) => <Typography>{data.country}</Typography>,
   },
   {
     title: 'Website',
-    render: (data: University) => <Link href={data.web_pages[0]}>Website</Link>,
+    render: (data) => <Link href={data.web_pages[0]}>Website</Link>,
     tdProps: {
+      align: 'right',
+    },
+    thProps: {
       align: 'right',
     },
   },
@@ -73,27 +78,30 @@ const Dashboard = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
+          flexWrap: 'wrap',
           mb: 1.5,
         }}
       >
-        <Box>
+        <Box sx={{ mr: 5 }}>
           <Typography variant="h3">Some universities</Typography>
-          <Typography variant="subtitle1">
+          <Typography variant="subtitle1" sx={{ color: '#666' }}>
             Discover some universities around the world
           </Typography>
         </Box>
-        <ToggleButtonGroup
-          color="primary"
-          value={country}
-          exclusive
-          onChange={handleCountryChange}
-        >
-          {countries.map((country) => (
-            <ToggleButton key={country} value={country}>
-              {country}
-            </ToggleButton>
-          ))}
-        </ToggleButtonGroup>
+        <Box sx={{ overflow: 'auto' }}>
+          <ToggleButtonGroup
+            color="primary"
+            value={country}
+            exclusive
+            onChange={handleCountryChange}
+          >
+            {countries.map((country) => (
+              <ToggleButton key={country} value={country}>
+                {country}
+              </ToggleButton>
+            ))}
+          </ToggleButtonGroup>
+        </Box>
       </Box>
       <Table status={status} data={data} content={tableContent} />
     </Container>

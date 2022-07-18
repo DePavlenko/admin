@@ -10,13 +10,15 @@ import {
 
 const universities: University[] = [
   {
+    name: 'AgroParisTech',
     country: 'France',
-    domains: ['AgroParisTech'],
+    domains: ['agroparistech.fr'],
     web_pages: ['http://testwebpage.com'],
   },
   {
+    name: 'AgroSup Dijon',
     country: 'France',
-    domains: ['American Graduate School in Paris'],
+    domains: ['agrosupdijon.fr'],
     web_pages: ['http://testwebpage.com'],
   },
 ];

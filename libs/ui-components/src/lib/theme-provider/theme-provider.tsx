@@ -1,6 +1,15 @@
 import { ThemeProvider as MUIThemeProvider } from '@mui/material/styles';
 import { createTheme } from '@mui/material/styles';
 
+declare module '@mui/material/styles' {
+  interface Palette {
+    tertiary: Palette['primary'];
+  }
+  interface PaletteOptions {
+    tertiary: PaletteOptions['primary'];
+  }
+}
+
 export const theme = createTheme({
   palette: {
     background: {
@@ -9,7 +18,12 @@ export const theme = createTheme({
     primary: {
       light: '#66C5FF',
       main: '#009EFF',
-      contrastText: '#fff',
+      contrastText: '#FFF',
+    },
+    tertiary: {
+      light: '#FAFAFA',
+      main: '#E6EAEC',
+      contrastText: '#000',
     },
   },
   typography: {

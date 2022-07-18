@@ -17,7 +17,7 @@ import { Status } from '@roamlerorg/types';
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(even)': {
-    backgroundColor: theme.palette.action.hover,
+    backgroundColor: theme.palette.tertiary.light,
   },
   // hide last border
   '&:last-child td, &:last-child th': {
@@ -27,17 +27,16 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
+    backgroundColor: theme.palette.tertiary.main,
+    color: theme.palette.tertiary.contrastText,
+    fontWeight: 700,
   },
 }));
 
 export type TableContent<T> = {
   title: string;
   render: (data: T) => string | JSX.Element;
+  thProps?: TableCellProps;
   tdProps?: TableCellProps;
 };
 
@@ -92,8 +91,8 @@ export const Table = <T,>({ status, data, error, content }: TableProps<T>) => {
       <MUITable sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            {content.map(({ title, tdProps }, idx) => (
-              <StyledTableCell key={idx} {...tdProps}>
+            {content.map(({ title, thProps }, idx) => (
+              <StyledTableCell key={idx} {...thProps}>
                 {title}
               </StyledTableCell>
             ))}
