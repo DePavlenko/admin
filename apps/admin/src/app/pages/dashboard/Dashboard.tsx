@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { styled } from '@mui/material/styles';
 import {
   Box,
   ToggleButtonGroup,
@@ -15,6 +16,18 @@ import {
   fetchUniversities,
   selectUniversities,
 } from '../../store/universities/universities.slice';
+
+const StyledToggleButton = styled(ToggleButton)(({ theme }) => ({
+  '&.MuiToggleButton-root': {
+    textTransform: 'none',
+    lineHeight: 1.2,
+    fontWeight: 700,
+  },
+  '&.Mui-selected, &.Mui-selected:hover': {
+    color: 'white',
+    backgroundColor: theme.palette.primary.main,
+  },
+}));
 
 const countries = ['Netherlands', 'France', 'Ukraine', 'Brazil'];
 
@@ -90,15 +103,15 @@ const Dashboard = () => {
         </Box>
         <Box sx={{ overflow: 'auto' }}>
           <ToggleButtonGroup
-            color="primary"
+            sx={{ backgroundColor: 'white' }}
             value={country}
             exclusive
             onChange={handleCountryChange}
           >
             {countries.map((country) => (
-              <ToggleButton key={country} value={country}>
+              <StyledToggleButton key={country} value={country}>
                 {country}
-              </ToggleButton>
+              </StyledToggleButton>
             ))}
           </ToggleButtonGroup>
         </Box>
